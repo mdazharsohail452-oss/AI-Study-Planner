@@ -1,8 +1,7 @@
-// app.js — Full controller: login → intake → Gemini AI → IndexedDB → dashboard → result card + history
 
 document.addEventListener('DOMContentLoaded', async () => {
 
-    // ─── DOM refs ────────────────────────────────────────────────
+    // ─── DOM refs
     const loginSection     = document.getElementById('login-section');
     const intakeSection    = document.getElementById('intake-section');
     const dashboardSection = document.getElementById('dashboard-section');
@@ -44,11 +43,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     const fileTagsEl       = document.getElementById('file-tags');
     const fileInput        = document.getElementById('study-file');
 
-    // ─── Initialise IndexedDB ────────────────────────────────────
+    // ─── Initialise IndexedDB 
     await DB.open();
     console.log('[App] IndexedDB ready.');
 
-    // ─── Boot: check login ───────────────────────────────────────
+    // ─── Boot: check login
     const student = Auth.getStudent();
     if (student) {
         showStudentHeader(student);
@@ -59,7 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loginSection.style.display = 'block';
     }
 
-    // ─── File tag preview on file select ────────────────────────
+    // File tag preview on file select 
     if (fileInput && fileTagsEl) {
         fileInput.addEventListener('change', () => {
             fileTagsEl.innerHTML = '';
@@ -67,13 +66,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const tag = document.createElement('span');
                 tag.className = 'file-tag';
                 tag.innerHTML = `📄 ${f.name} <button type="button" class="file-tag-remove" title="Remove">&times;</button>`;
-                // Note: actual removal from FileList is not possible via DOM — tag is cosmetic
                 fileTagsEl.appendChild(tag);
             });
         });
     }
 
-    // ─── Login ───────────────────────────────────────────────────
+    // ─── Login 
     loginForm.addEventListener('submit', async e => {
         e.preventDefault();
         const name  = document.getElementById('student-name').value.trim();
@@ -85,7 +83,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         showIntake();
     });
 
-    // ─── Logout ──────────────────────────────────────────────────
+    // Logout 
     logoutBtn.addEventListener('click', () => {
         Auth.logout();
         headerUserInfo.style.display  = 'none';
@@ -94,7 +92,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         loginSection.style.display     = 'block';
     });
 
-    // ─── Tab switching ───────────────────────────────────────────
+    // Tab switching
     tabManual.addEventListener('click', () => {
         tabManual.classList.add('active'); tabUpload.classList.remove('active');
         manualForm.style.display = 'flex'; uploadForm.style.display  = 'none';
@@ -104,7 +102,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         uploadForm.style.display = 'flex'; manualForm.style.display  = 'none';
     });
 
-    // ─── Manual form ─────────────────────────────────────────────
     manualForm.addEventListener('submit', async e => {
         e.preventDefault();
         const topic      = document.getElementById('topic').value.trim();
@@ -115,7 +112,6 @@ document.addEventListener('DOMContentLoaded', async () => {
             '🤖 Asking Gemini AI to build your plan...');
     });
 
-    // ─── Upload form (with manual weakness override) ─────────────
     uploadForm.addEventListener('submit', async e => {
         e.preventDefault();
         const files = fileInput.files;
@@ -153,7 +149,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await runGeneration(topic, goal, weaknesses, btn, '🤖 Gemini AI is analysing your files...');
     });
 
-    // ─── Shared generation pipeline (saves to IndexedDB) ─────────
+    // Shared generation pipeline (saves to IndexedDB) 
     async function runGeneration(topic, goal, weaknesses, btn, statusMsg) {
         const originalText = btn.textContent;
         btn.disabled = true;
@@ -183,7 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     }
 
-    // ─── Change Path ─────────────────────────────────────────────
+    // Change Path 
     resetBtn.addEventListener('click', async () => {
         const s = Auth.getStudent();
         const plan = s ? await DB.getPlan(s.email) : AppState.loadPlan();
@@ -197,7 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         showIntake();
     });
 
-    // ─── Result Card ─────────────────────────────────────────────
+    //  Result Card
     viewResultBtn.addEventListener('click', async () => {
         const s   = Auth.getStudent();
         const plan = s ? await DB.getPlan(s.email) : AppState.loadPlan();
@@ -237,7 +233,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     resultOverlay.addEventListener('click', e => { if (e.target === resultOverlay) resultOverlay.style.display = 'none'; });
     resultPrintBtn.addEventListener('click', () => window.print());
 
-    // ─── History Panel ────────────────────────────────────────────
+    //  History Panel 
     viewHistoryBtn.addEventListener('click', async () => {
         const s = Auth.getStudent();
         if (!s) return;
@@ -265,7 +261,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     historyCloseBtn.addEventListener('click', () => { historyOverlay.style.display = 'none'; });
     historyOverlay.addEventListener('click', e => { if (e.target === historyOverlay) historyOverlay.style.display = 'none'; });
 
-    // ─── Helpers ─────────────────────────────────────────────────
     function showLoading(msg = 'Curating your personalised path...') {
         loadingStatus.textContent     = msg;
         intakeSection.style.display   = 'none';
@@ -294,7 +289,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         headerUserInfo.style.display = 'flex';
     }
 
-    // ─── Progress ring ────────────────────────────────────────────
+    //  Progress ring 
     async function updateProgress() {
         const s   = Auth.getStudent();
         const pct = s ? await DB.calculateProgress(s.email) : AppState.calculateProgress();
@@ -302,7 +297,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         progressPath.setAttribute('stroke-dasharray', `${pct}, 100`);
     }
 
-    // ─── Render full plan ─────────────────────────────────────────
+    //  Render full plan 
     function renderPlan(plan) {
         planOverview.textContent = plan.overview;
 
