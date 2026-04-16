@@ -13,7 +13,7 @@ const STORES = {
 const DB = {
     _db: null,
 
-    // ── Open / initialise the database ──────────────────────────
+    // Openi / initialise the database 
     async open() {
         if (this._db) return this._db;
 
@@ -45,8 +45,6 @@ const DB = {
             req.onerror   = e => reject(e.target.error);
         });
     },
-
-    // ── Generic helpers ──────────────────────────────────────────
     async _tx(store, mode, fn) {
         const db = await this.open();
         return new Promise((resolve, reject) => {
@@ -58,7 +56,7 @@ const DB = {
         });
     },
 
-    // ── Students ─────────────────────────────────────────────────
+    // Students 
     async saveStudent(student) {
         return this._tx(STORES.STUDENTS, 'readwrite', s => s.put(student));
     },
@@ -67,7 +65,7 @@ const DB = {
         return this._tx(STORES.STUDENTS, 'readonly', s => s.get(email));
     },
 
-    // ── Active Plan (one per student) ────────────────────────────
+    // Active Plan (one per student) 
     async savePlan(email, plan) {
         const record = { email, plan, savedAt: new Date().toISOString() };
         return this._tx(STORES.PLANS, 'readwrite', s => s.put(record));
@@ -82,7 +80,7 @@ const DB = {
         return this._tx(STORES.PLANS, 'readwrite', s => s.delete(email));
     },
 
-    // ── History (append-only log of all plans) ───────────────────
+    // History (append-only log of all plans) 
     async addToHistory(email, plan) {
         const record = {
             email,
@@ -102,12 +100,12 @@ const DB = {
             const store = tx.objectStore(STORES.HISTORY);
             const index = store.index('email');
             const req   = index.getAll(email);
-            req.onsuccess = () => resolve(req.result.reverse()); // newest first
+            req.onsuccess = () => resolve(req.result.reverse()); 
             req.onerror   = () => reject(req.error);
         });
     },
 
-    // ── Task checkbox update inside DB ───────────────────────────
+    //  Task checkbox update inside DB 
     async updateTask(email, dayId, taskId, completed) {
         const plan = await this.getPlan(email);
         if (!plan) return;
@@ -122,7 +120,7 @@ const DB = {
         return plan;
     },
 
-    // ── Progress calculation ──────────────────────────────────────
+    // Progress calculation 
     async calculateProgress(email) {
         const plan = await this.getPlan(email);
         if (!plan) return 0;
