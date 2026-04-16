@@ -1,45 +1,45 @@
 /* ==========================================================================
-   CSS Variables & Tokens
+   CSS Variables & Tokens - Vibrant Aurora Theme (No Purple!)
    ========================================================================== */
 :root {
-    /* Color Palette - Dark Theme */
-    --bg-color: #0f172a; /* Deep slate blue */
-    --bg-gradient: radial-gradient(circle at top left, #1e293b, #0f172a);
+    /* Ultra Deep Navy Background */
+    --bg-color: #020617; 
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #cbd5e1;
     
-    /* Accents */
-    --primary-color: #8b5cf6; /* Vibrant violet */
-    --primary-hover: #7c3aed;
-    --secondary-color: #06b6d4; /* Cyan/Teal */
-    --accent-color: #ec4899; /* Pink */
+    /* Vibrant Colorful Accents */
+    --primary-color: #0ea5e9; /* Sky Blue */
+    --secondary-color: #14b8a6; /* Teal */
+    --third-color: #f59e0b; /* Amber/Golden */
+    --fourth-color: #f43f5e; /* Rose/Red */
+    --success-color: #10b981; /* Emerald/Success */
 
     /* Glassmorphism Tokens */
-    --glass-bg: rgba(30, 41, 59, 0.4);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    --glass-blur: blur(12px);
+    --glass-bg: rgba(15, 23, 42, 0.55); 
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
+    --glass-blur: blur(20px);
 
     /* Typography */
     --font-family: 'Outfit', sans-serif;
     --font-size-base: 16px;
-    --h1-size: 2.5rem;
-    --h2-size: 1.75rem;
+    --h1-size: 3rem; /* Larger, bolder impact */
+    --h2-size: 1.8rem;
 
     /* Spacing & Layout */
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    --border-radius: 16px;
+    --border-radius: 16px; /* Friendly and modern rounding */
     
     /* Transitions */
     --transition-fast: 0.2s ease;
-    --transition-normal: 0.3s ease;
+    --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ==========================================================================
-   Reset & Base Styles
+   Reset & Base Styles with Multi-Orb Animated Background
    ========================================================================== */
 * {
     margin: 0;
@@ -47,70 +47,68 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    position: relative;
+}
+
 body {
     font-family: var(--font-family);
     background: var(--bg-color);
-    background-image: var(--bg-gradient);
     color: var(--text-primary);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     line-height: 1.6;
-    overflow-x: hidden;
-    position: relative;
 }
 
-/* Adding a dynamic background glow effect for an immersive feel */
+/* Beautiful Animated Light Orbs */
 body::before {
-    content: '';
-    position: absolute;
-    top: -20%;
-    left: -10%;
-    width: 50vw;
-    height: 50vh;
+    content: ''; position: absolute;
+    top: -10%; left: -10%;
+    width: 60vw; height: 60vh;
     background: radial-gradient(circle, var(--primary-color) 0%, transparent 60%);
-    opacity: 0.15;
-    filter: blur(100px);
-    z-index: -1;
+    opacity: 0.25; filter: blur(120px); z-index: -1;
     animation: drift 15s infinite alternate ease-in-out;
 }
 
 body::after {
-    content: '';
-    position: absolute;
-    bottom: -20%;
-    right: -10%;
-    width: 50vw;
-    height: 50vh;
-    background: radial-gradient(circle, var(--secondary-color) 0%, transparent 60%);
-    opacity: 0.15;
-    filter: blur(100px);
-    z-index: -1;
+    content: ''; position: absolute;
+    bottom: -15%; right: -15%;
+    width: 65vw; height: 65vh;
+    background: radial-gradient(circle, var(--third-color) 0%, transparent 60%);
+    opacity: 0.2; filter: blur(120px); z-index: -1;
     animation: drift 20s infinite alternate-reverse ease-in-out;
 }
 
+/* Third hidden orb fixed for extra gradient mixing */
+html::before {
+    content: ''; position: fixed;
+    top: 30%; left: 35%;
+    width: 50vw; height: 50vh;
+    background: radial-gradient(circle, var(--fourth-color) 0%, transparent 60%);
+    opacity: 0.15; filter: blur(140px); z-index: -2;
+    animation: drift 25s infinite alternate ease-in-out;
+    pointer-events: none;
+}
+
 @keyframes drift {
-    0% { transform: translateY(0) scale(1); }
-    100% { transform: translateY(30px) scale(1.1); }
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, 40px) scale(1.1); }
 }
 
 /* ==========================================================================
-   Layout Containers
+   Layout Containers & Glass Panels
    ========================================================================== */
 .app-container {
     width: 100%;
     max-width: 1200px;
     padding: var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
+    display: flex; flex-direction: column; gap: var(--spacing-lg);
     z-index: 1;
 }
 
-/* ==========================================================================
-   Glassmorphism Components
-   ========================================================================== */
 .glass-panel {
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
@@ -123,140 +121,100 @@ body::after {
 }
 
 .glass-panel:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 45px 0 rgba(0, 0, 0, 0.8), 0 0 20px rgba(14, 165, 233, 0.15);
 }
 
 /* ==========================================================================
-   Typography
+   Vibrant Typography
    ========================================================================== */
-h1, h2, h3 {
-    font-weight: 600;
-    margin-bottom: var(--spacing-sm);
-}
+h1, h2, h3 { font-weight: 700; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
 
 h1 {
     font-size: var(--h1-size);
-    background: linear-gradient(135deg, var(--text-primary), var(--primary-color));
-    /* Fallback for background clip */
+    /* Vibrant multi-color gradient text */
+    background: linear-gradient(135deg, var(--secondary-color), var(--third-color), var(--fourth-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    background-clip: text; color: transparent;
 }
 
-h2 {
-    font-size: var(--h2-size);
-}
-
-p {
-    color: var(--text-secondary);
-    margin-bottom: var(--spacing-md);
-}
+h2 { font-size: var(--h2-size); }
+p { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
 
 /* ==========================================================================
    Buttons
    ========================================================================== */
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: 500;
-    font-family: var(--font-family);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
-    position: relative;
-    overflow: hidden;
+    color: white; border: none;
+    padding: 0.8rem 1.6rem; font-size: 1.05rem; font-weight: 600;
+    font-family: var(--font-family); border-radius: 12px;
+    cursor: pointer; transition: all var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.5);
+    position: relative; overflow: hidden;
 }
 
 .btn-primary::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    content: ''; position: absolute;
+    top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.5s ease;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 20px rgba(20, 184, 166, 0.6);
 }
 
-.btn-primary:hover::after {
-    left: 100%;
+.btn-primary:hover::after { left: 100%; }
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+    padding: 0.6rem 1.2rem; font-size: 0.95rem; font-weight: 500;
+    border-radius: 12px; cursor: pointer; transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+    background: var(--fourth-color);
+    border-color: var(--fourth-color);
+    color: white;
 }
 
 /* ==========================================================================
    Forms & Inputs
    ========================================================================== */
-.intake-form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    margin-top: var(--spacing-md);
-}
+.intake-form { display: flex; flex-direction: column; gap: var(--spacing-md); margin-top: var(--spacing-md); }
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-label {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-}
+label { font-size: 0.95rem; color: var(--text-primary); font-weight: 600; }
 
 input[type="text"] {
-    background: rgba(15, 23, 42, 0.6);
-    border: 1px solid var(--glass-border);
-    color: var(--text-primary);
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    font-family: var(--font-family);
-    font-size: 1rem;
+    background: rgba(2, 6, 23, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.08); /* Thicker for color */
+    color: white; padding: 0.9rem 1rem; border-radius: 12px;
+    font-family: var(--font-family); font-size: 1rem;
     transition: all var(--transition-fast);
 }
 
 input[type="text"]:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--text-secondary);
-    border: 1px solid var(--text-secondary);
-    padding: 0.5rem 1rem;
-    font-size: 0.9rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-
-.btn-secondary:hover {
-    color: var(--text-primary);
-    border-color: var(--text-primary);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
 }
 
 /* ==========================================================================
-   UI Components (Spinner & Results)
+   UI Components (Multi-colored Spinner)
    ========================================================================== */
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(139, 92, 246, 0.2);
+    width: 45px; height: 45px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
     border-left-color: var(--primary-color);
+    border-top-color: var(--secondary-color);
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 1s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
     margin: var(--spacing-md) auto;
 }
 
@@ -266,16 +224,153 @@ input[type="text"]:focus {
 }
 
 /* ==========================================================================
-   Dashboard Grid Layout (Phase 4 & 5)
+   Dashboard Grid Layout
    ========================================================================== */
-.dashboard-area {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-    width: 100%;
+.dashboard-area { display: flex; flex-direction: column; gap: var(--spacing-lg); width: 100%; }
+.dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md); }
+.overview-text { margin-bottom: 0; max-width: 750px; font-size: 1.05rem; }
+
+.dashboard-grid { display: grid; grid-template-columns: 3fr 2fr; gap: var(--spacing-lg); }
+
+@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+.dashboard-column { display: flex; flex-direction: column; gap: var(--spacing-lg); }
+
+/* ==========================================================================
+   Progress Circle Widget (Gradient stroke logic)
+   ========================================================================== */
+.progress-widget { width: 90px; height: 90px; }
+.circular-chart { display: block; max-width: 100%; max-height: 100%; }
+.circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 3.8; }
+.circle {
+    fill: none;
+    stroke: var(--success-color);
+    stroke-width: 3; stroke-linecap: round;
+    transition: stroke-dasharray 1s ease-out;
+}
+.percentage { fill: var(--text-primary); font-family: var(--font-family); font-size: 0.6em; text-anchor: middle; font-weight: 700; }
+
+/* ==========================================================================
+   Roadmap & Timeline Widget
+   ========================================================================== */
+.timeline { position: relative; padding-left: 28px; margin-top: var(--spacing-md); }
+.timeline::before { content: ''; position: absolute; top: 0; left: 6px; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--primary-color), var(--third-color)); border-radius: 4px; }
+
+.timeline-item { position: relative; margin-bottom: var(--spacing-lg); }
+.timeline-item::before {
+    content: ''; position: absolute; top: 6px; left: -28px;
+    width: 13px; height: 13px; border-radius: 50%;
+    background: var(--primary-color);
+    box-shadow: 0 0 10px var(--primary-color);
 }
 
-.dashboard-header {
+.timeline-item h4 { margin-top: 0; margin-bottom: var(--spacing-sm); color: var(--secondary-color); font-size: 1.15rem;}
+
+.task-list { list-style: none; padding: 0; margin: 0; }
+.task-item {
+    display: flex; align-items: center; gap: 14px;
+    background: rgba(2, 6, 23, 0.5); padding: 14px 18px;
+    border-radius: 12px; margin-bottom: 10px;
+    border: 1px solid var(--glass-border);
+    transition: all var(--transition-fast);
+}
+
+.task-item:hover { border-color: var(--primary-color); transform: translateX(6px); background: rgba(14, 165, 233, 0.08); }
+
+.task-item input[type="checkbox"] {
+    width: 22px; height: 22px; cursor: pointer;
+    accent-color: var(--success-color); /* Green ticks! */
+}
+
+.task-item.completed { opacity: 0.5; background: rgba(34, 197, 94, 0.05); }
+.task-item.completed span { text-decoration: line-through; color: var(--text-secondary); }
+
+/* ==========================================================================
+   Lists (Priorities, Questions, Resources - Multi-colored Accents!)
+   ========================================================================== */
+.priority-list, .question-list, .resource-list {
+    list-style: none; padding: 0; margin-top: var(--spacing-md); display: flex; flex-direction: column; gap: 12px;
+}
+
+.priority-list li, .question-list li, .resource-list li {
+    background: rgba(2, 6, 23, 0.5); padding: 16px; border-radius: 12px;
+    font-size: 0.95rem; border-left: 4px solid;
+    transition: transform var(--transition-fast), border-color var(--transition-fast);
+    border-right: 1px solid var(--glass-border);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.priority-list li { border-left-color: var(--fourth-color); }
+.priority-list li:hover { transform: translateX(4px); background: rgba(244, 63, 94, 0.05); }
+
+.question-list li { border-left-color: var(--third-color); }
+.question-list li:hover { transform: translateX(4px); background: rgba(245, 158, 11, 0.05); }
+
+.resource-list li { border-left-color: var(--secondary-color); }
+.resource-list li:hover { transform: translateX(4px); background: rgba(20, 184, 166, 0.05); }
+
+.resource-list a { color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
+.resource-list a:hover { color: var(--secondary-color); text-decoration: underline; }
+
+/* Scrollable Containers */
+.question-list, .resource-list { max-height: 400px; overflow-y: auto; padding-right: 10px; }
+.question-list::-webkit-scrollbar, .resource-list::-webkit-scrollbar { width: 6px; }
+.question-list::-webkit-scrollbar-track, .resource-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+.question-list::-webkit-scrollbar-thumb { background: var(--third-color); border-radius: 10px; }
+.resource-list::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+
+/* Difficulty Badges */
+.diff-badge { font-size: 0.8rem; padding: 4px 10px; border-radius: 8px; margin-left: 10px; font-weight: 700; display: inline-block; }
+.diff-easy { color: #fff; background: rgba(16, 185, 129, 0.8); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);}
+.diff-medium { color: #fff; background: rgba(245, 158, 11, 0.8); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);}
+.diff-hard { color: #fff; background: rgba(244, 63, 94, 0.8); box-shadow: 0 0 10px rgba(244, 63, 94, 0.4);}
+
+/* Resource Descriptions */
+.res-type {
+    font-size: 0.75rem; color: #fff; background: var(--secondary-color);
+    margin-left: 8px; padding: 2px 8px; border-radius: 12px; font-weight: 600; box-shadow: 0 0 8px rgba(20, 184, 166, 0.4);
+}
+.res-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px; margin-bottom: 0; line-height: 1.5; }
+
+/* ==========================================================================
+   File Upload Styles
+   ========================================================================== */
+.file-upload-group {
+    background: rgba(14, 165, 233, 0.05); border: 2px dashed var(--primary-color);
+    padding: var(--spacing-lg); border-radius: 12px; text-align: center;
+    transition: all var(--transition-fast);
+}
+.file-upload-group:hover { background: rgba(14, 165, 233, 0.1); border-color: var(--secondary-color); }
+.file-input { margin-top: 15px; color: var(--text-primary); font-family: var(--font-family); width: 100%; }
+.file-input::file-selector-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border: none; color: white; font-weight: 600; padding: 0.6rem 1.2rem;
+    border-radius: 8px; cursor: pointer; margin-right: 15px; transition: all var(--transition-fast);
+}
+.file-input::file-selector-button:hover { box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4); transform: scale(1.05); }
+
+/* ==========================================================================
+   Tabs UI
+   ========================================================================== */
+.tabs-container { display: flex; gap: 12px; margin-bottom: var(--spacing-md); border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+.tab-btn {
+    background: transparent; border: none; color: var(--text-secondary);
+    padding: 10px 20px; font-family: var(--font-family); font-size: 1.05rem; font-weight: 500;
+    cursor: pointer; border-radius: 10px; transition: all var(--transition-fast);
+}
+.tab-btn:hover { background: rgba(255, 255, 255, 0.05); color: white; }
+.tab-btn.active {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
+}
+
+/* ==========================================================================
+   App Header
+   ========================================================================== */
+.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -283,186 +378,408 @@ input[type="text"]:focus {
     gap: var(--spacing-md);
 }
 
-.overview-text {
-    margin-bottom: 0;
-    max-width: 700px;
-}
-
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    gap: var(--spacing-lg);
-}
-
-@media (max-width: 900px) {
-    .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.dashboard-column {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-lg);
-}
-
 /* ==========================================================================
-   Progress Circle Widget
+   Student Avatar
    ========================================================================== */
-.progress-widget {
-    width: 80px;
-    height: 80px;
-}
-
-.circular-chart {
-    display: block;
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.circle-bg {
-    fill: none;
-    stroke: rgba(255, 255, 255, 0.1);
-    stroke-width: 3.8;
-}
-
-.circle {
-    fill: none;
-    stroke: var(--secondary-color);
-    stroke-width: 2.8;
-    stroke-linecap: round;
-    transition: stroke-dasharray 0.8s ease-out;
-}
-
-.percentage {
-    fill: var(--text-primary);
-    font-family: var(--font-family);
-    font-size: 0.6em;
-    text-anchor: middle;
-    font-weight: 600;
-}
-
-/* ==========================================================================
-   Roadmap & Timeline Widget
-   ========================================================================== */
-.timeline {
-    position: relative;
-    padding-left: 20px;
-    margin-top: var(--spacing-md);
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 2px;
-    height: 100%;
-    background: var(--glass-border);
-}
-
-.timeline-item {
-    position: relative;
-    margin-bottom: var(--spacing-lg);
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: -25px;
-    width: 12px;
-    height: 12px;
+.avatar {
+    width: 44px; height: 44px;
     border-radius: 50%;
-    background: var(--primary-color);
-    box-shadow: 0 0 10px var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1rem; color: #fff;
+    flex-shrink: 0;
 }
 
-.timeline-item h4 {
-    margin-top: 0;
-    margin-bottom: var(--spacing-sm);
-    color: var(--text-primary);
-}
-
-.task-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.task-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: rgba(15, 23, 42, 0.4);
-    padding: 12px 16px;
+.btn-logout {
+    background: rgba(244, 63, 94, 0.15);
+    border: 1px solid var(--fourth-color);
+    color: var(--fourth-color);
+    padding: 6px 14px;
     border-radius: 8px;
-    margin-bottom: 8px;
-    border: 1px solid transparent;
+    font-family: var(--font-family);
+    font-size: 0.9rem;
+    cursor: pointer;
     transition: all var(--transition-fast);
 }
-
-.task-item:hover {
-    background: rgba(15, 23, 42, 0.6);
-    border-color: var(--glass-border);
-    transform: translateX(4px);
-}
-
-.task-item input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--primary-color);
-    cursor: pointer;
-}
-
-.task-item.completed {
-    opacity: 0.5;
-}
-
-.task-item.completed span {
-    text-decoration: line-through;
-}
+.btn-logout:hover { background: var(--fourth-color); color: #fff; }
 
 /* ==========================================================================
-   Lists (Priorities, Questions, Resources)
+   View Result Card Button
    ========================================================================== */
-.priority-list, .question-list, .resource-list {
-    list-style: none;
-    padding: 0;
-    margin-top: var(--spacing-md);
+.btn-result {
+    background: linear-gradient(135deg, var(--third-color), var(--fourth-color));
+    color: white; border: none;
+    padding: 0.7rem 1.4rem; font-size: 1rem; font-weight: 600;
+    font-family: var(--font-family); border-radius: 12px;
+    cursor: pointer; transition: all var(--transition-fast);
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+}
+.btn-result:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5); }
+
+/* ==========================================================================
+   Result Card Overlay
+   ========================================================================== */
+.result-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+    padding: var(--spacing-lg);
+    overflow-y: auto;
+}
+
+.result-card {
+    width: 100%;
+    max-width: 560px;
     display: flex;
     flex-direction: column;
+    gap: var(--spacing-md);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    box-shadow: 0 0 50px rgba(14, 165, 233, 0.2), 0 0 100px rgba(245, 158, 11, 0.1);
+}
+
+.result-card-header {
+    text-align: center;
+}
+
+.result-badge {
+    font-size: 3rem;
+    margin-bottom: 8px;
+}
+
+.result-subtitle {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-bottom: 0;
+}
+
+.result-student-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: rgba(14, 165, 233, 0.08);
+    padding: 14px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+}
+
+.result-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.2rem; color: white;
+    flex-shrink: 0;
+}
+
+.result-name  { font-size: 1.2rem; font-weight: 700; }
+.result-email { font-size: 0.85rem; color: var(--text-secondary); }
+
+/* Stats grid */
+.result-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
 
-.priority-list li, .question-list li, .resource-list li {
-    background: rgba(15, 23, 42, 0.4);
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    border-left: 4px solid var(--primary-color);
-    transition: transform var(--transition-fast);
+@media (max-width: 480px) { .result-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.stat-card {
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
 }
 
-.priority-list li:hover, .question-list li:hover, .resource-list li:hover {
-    transform: translateX(4px);
+.stat-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    word-break: break-word;
 }
 
-.resource-list li {
-    border-left-color: var(--secondary-color);
-}
-
-.question-list li {
-    border-left-color: var(--accent-color);
-}
-
-.resource-list a {
-    color: var(--text-primary);
-    text-decoration: none;
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
     font-weight: 500;
 }
 
-.resource-list a:hover {
+.stat-blue   { background: rgba(14, 165, 233, 0.12); border: 1px solid rgba(14, 165, 233, 0.25); }
+.stat-teal   { background: rgba(20, 184, 166, 0.12); border: 1px solid rgba(20, 184, 166, 0.25); }
+.stat-amber  { background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); }
+.stat-rose   { background: rgba(244, 63, 94, 0.12);  border: 1px solid rgba(244, 63, 94, 0.25); }
+
+.result-goal-box, .result-weakness-box {
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+}
+
+.result-goal-box strong, .result-weakness-box strong { color: var(--text-primary); }
+
+/* Grade circle */
+.result-grade-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 14px;
+    padding: 18px 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.grade-circle {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 4px solid;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+
+.grade-circle span { font-size: 2rem; font-weight: 900; }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.result-actions .btn-primary, .result-actions .btn-secondary { flex: 1; text-align: center; }
+
+/* ==========================================================================
+   Modern Icon Inputs
+   ========================================================================== */
+.input-icon-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+    pointer-events: none;
+    transition: color var(--transition-fast);
+    flex-shrink: 0;
+}
+
+.input-icon-field {
+    background: rgba(2, 6, 23, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    color: white;
+    padding: 0.9rem 1rem 0.9rem 2.8rem; /* left offset for icon */
+    border-radius: 12px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    width: 100%;
+    transition: all var(--transition-fast);
+}
+
+.input-icon-field:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+}
+
+.input-icon-wrap:focus-within .input-icon {
+    color: var(--primary-color);
+}
+
+.input-hint {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+    padding-left: 4px;
+}
+
+/* ==========================================================================
+   Print Styles — Clean white card, no dark theme
+   ========================================================================== */
+@media print {
+    /* Hide absolutely everything */
+    body { background: white !important; }
+    .app-header,
+    #login-section,
+    #intake-section,
+    #dashboard-section,
+    .result-actions { display: none !important; }
+
+    /* Make overlay non-fixed so it flows into the page */
+    .result-overlay {
+        position: static !important;
+        background: white !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+        display: block !important;
+    }
+
+    /* White card, no glass */
+    .result-card {
+        max-width: 100% !important;
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: white !important;
+        color: #111 !important;
+        padding: 24px !important;
+    }
+
+    /* Ensure text is dark for print */
+    .result-card h2,
+    .result-name,
+    .result-email,
+    .result-subtitle,
+    .stat-value,
+    .stat-label,
+    .result-goal-box,
+    .result-weakness-box { color: #111 !important; }
+
+    .result-card p { color: #444 !important; }
+
+    /* Show stat cards with light borders instead of glowing */
+    .stat-blue, .stat-teal, .stat-amber, .stat-rose {
+        background: #f8f8f8 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .result-goal-box, .result-weakness-box {
+        background: #f8f8f8 !important;
+        border: 1px solid #ccc !important;
+        color: #333 !important;
+    }
+
+    .result-grade-section {
+        background: #f8f8f8 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .result-student-info {
+        background: #f0f8ff !important;
+        border: 1px solid #cce !important;
+    }
+
+    /* Remove glowing avatar, use flat color */
+    .result-avatar {
+        background: #0ea5e9 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+/* ==========================================================================
+   File Tags (pill display after file selection)
+   ========================================================================== */
+.file-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+}
+
+.file-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(14, 165, 233, 0.15);
+    border: 1px solid rgba(14, 165, 233, 0.4);
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn { from { opacity:0; transform:scale(0.9); } to { opacity:1; transform:scale(1); } }
+
+.file-tag-remove {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    opacity: 0.7;
+}
+.file-tag-remove:hover { opacity: 1; }
+
+/* ==========================================================================
+   Plan History Button
+   ========================================================================== */
+.btn-history {
+    background: rgba(20, 184, 166, 0.15);
+    border: 1px solid var(--secondary-color);
     color: var(--secondary-color);
-    text-decoration: underline;
+    padding: 0.7rem 1.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: var(--font-family);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+.btn-history:hover { background: var(--secondary-color); color: white; }
+
+/* ==========================================================================
+   History List Items
+   ========================================================================== */
+.history-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.history-list::-webkit-scrollbar { width: 4px; }
+.history-list::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
+
+.history-item {
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid var(--glass-border);
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 12px;
+    padding: 14px 16px;
+    transition: transform var(--transition-fast);
+}
+.history-item:hover { transform: translateX(4px); background: rgba(20, 184, 166, 0.05); }
+
+.history-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.history-index {
+    font-size: 0.75rem;
+    background: var(--secondary-color);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+}
+
+.history-date {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+}
+
+.history-topic {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.history-detail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }

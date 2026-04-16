@@ -4,100 +4,262 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Study Path Tutor</title>
-    <meta name="description" content="Generate a personalized study path based on your goals and weak areas.">
+    <meta name="description" content="Your AI-powered personalised study plan generator.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <!-- Basic structural mockup to demonstrate glassmorphism and the dark theme -->
-    <main class="app-container">
-        <header class="glass-panel">
+<main class="app-container">
+
+    <!-- ═══════════════════════════════════════════════════════
+         HEADER
+    ════════════════════════════════════════════════════════ -->
+    <header class="glass-panel app-header">
+        <div>
             <h1>AI Study Path Tutor</h1>
-            <p>Your personalized journey to mastery.</p>
-        </header>
+            <p style="margin:0;">Your personalised journey to mastery — powered by Gemini AI.</p>
+        </div>
+        <div id="header-user-info" style="display:none; align-items:center; gap:14px;">
+            <div class="avatar" id="avatar-initials"></div>
+            <div>
+                <div id="header-student-name" style="font-weight:700;"></div>
+                <div id="header-student-email" style="font-size:0.8rem; color:var(--text-secondary);"></div>
+            </div>
+            <button class="btn-logout" id="logout-btn">Logout</button>
+        </div>
+    </header>
 
-        <section id="intake-section" class="glass-panel content-area">
-            <h2>Create Your Study Plan</h2>
-            <p>Tell us what you want to learn, and our AI will build your roadmap.</p>
-            
-            <form id="intake-form" class="intake-form">
-                <div class="form-group">
-                    <label for="topic">What do you want to study?</label>
-                    <input type="text" id="topic" name="topic" required placeholder="e.g., React.js, Python, System Design" />
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 1 — LOGIN
+    ════════════════════════════════════════════════════════ -->
+    <section id="login-section" class="glass-panel content-area">
+        <h2>Welcome, Student 👋</h2>
+        <p>Sign in to save your progress, view your result card, and keep your study plan.</p>
+        <form id="login-form" class="intake-form">
+            <div class="form-group">
+                <label for="student-name">👤 Your Full Name</label>
+                <div class="input-icon-wrap">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    <input type="text" id="student-name" class="input-icon-field" required placeholder="e.g., Priya Sharma" />
                 </div>
-                
-                <div class="form-group">
-                    <label for="goal">What is your main goal?</label>
-                    <input type="text" id="goal" name="goal" required placeholder="e.g., Build a full-stack app, Pass an interview" />
+            </div>
+            <div class="form-group">
+                <label for="student-email">✉️ Email Address</label>
+                <div class="input-icon-wrap">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <input type="email" id="student-email" class="input-icon-field" required placeholder="e.g., priya@college.edu" autocomplete="email" />
                 </div>
+                <span class="input-hint">We use this only for your result card — no spam.</span>
+            </div>
+            <button type="submit" class="btn-primary" id="login-btn">Get Started &rarr;</button>
+        </form>
+    </section>
 
-                <div class="form-group">
-                    <label for="weaknesses">What are your weak areas?</label>
-                    <input type="text" id="weaknesses" name="weaknesses" required placeholder="e.g., State management, Algorithms" />
-                </div>
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 2 — INTAKE (Manual + Upload)
+    ════════════════════════════════════════════════════════ -->
+    <section id="intake-section" class="glass-panel content-area" style="display:none;">
+        <h2>Build Your Study Plan</h2>
+        <p>Choose how you want to generate your personalised roadmap.</p>
 
-                <button type="submit" class="btn-primary" id="generate-btn">Generate Path</button>
-            </form>
-        </section>
+        <div class="tabs-container">
+            <button class="tab-btn active" id="tab-manual">✏️ Manual Input</button>
+            <button class="tab-btn" id="tab-upload">📁 Upload File</button>
+        </div>
 
-        <!-- Dashboard Section -->
-        <section id="dashboard-section" class="dashboard-area" style="display: none;">
-            <!-- Header for dashboard -->
-            <header class="dashboard-header glass-panel">
-                <div class="user-info">
-                    <h2>Your AI Study Plan</h2>
-                    <p id="plan-overview" class="overview-text"></p>
+        <!-- Manual Form -->
+        <form id="intake-form-manual" class="intake-form">
+            <div class="form-group">
+                <label for="topic">What do you want to study?</label>
+                <input type="text" id="topic" required placeholder="e.g., React.js, Python, System Design" />
+            </div>
+            <div class="form-group">
+                <label for="goal">What is your main goal?</label>
+                <input type="text" id="goal" required placeholder="e.g., Build a full-stack app, Pass an interview" />
+            </div>
+            <div class="form-group">
+                <label for="weaknesses">What are your weak areas?</label>
+                <input type="text" id="weaknesses" required placeholder="e.g., State management, Algorithms" />
+            </div>
+            <button type="submit" class="btn-primary" id="generate-manual-btn">⚡ Generate with Gemini AI</button>
+        </form>
+
+        <!-- Upload Form (Hidden by default) -->
+        <form id="intake-form-upload" class="intake-form" style="display:none;">
+            <div class="form-group file-upload-group">
+                <label for="study-file" style="color:var(--primary-color); font-weight:700;">📂 Upload Syllabus / Study Material</label>
+                <p style="font-size:0.8rem; margin:6px 0 10px; color:var(--text-secondary);">AI reads your files and generates a study plan. <strong>(Multiple files allowed)</strong></p>
+                <input type="file" id="study-file" accept=".pdf,.doc,.docx,.txt,.ppt,.pptx,.png,.jpg" class="file-input" multiple required />
+                <div id="file-tags" class="file-tags"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="upload-weaknesses">⚠️ Your Weak Areas <span style="font-weight:400; color:var(--text-secondary);">(based on these files)</span></label>
+                <div class="input-icon-wrap">
+                    <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <input type="text" id="upload-weaknesses" class="input-icon-field" placeholder="e.g., Recursion, Async/Await, Calculus" />
                 </div>
+                <span class="input-hint">Optional — leave blank to auto-detect from file content.</span>
+            </div>
+
+            <button type="submit" class="btn-primary" id="generate-upload-btn">⚡ Analyse Files &amp; Generate</button>
+        </form>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 3 — DASHBOARD
+    ════════════════════════════════════════════════════════ -->
+    <section id="dashboard-section" class="dashboard-area" style="display:none;">
+
+        <!-- Dashboard header row -->
+        <header class="dashboard-header glass-panel">
+            <div class="user-info">
+                <h2>Your AI Study Plan</h2>
+                <p id="plan-overview" class="overview-text"></p>
+            </div>
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
                 <div class="progress-widget">
                     <svg viewBox="0 0 36 36" class="circular-chart">
-                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <path class="circle" id="progress-path" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path class="circle" id="progress-path" stroke-dasharray="0, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
                         <text x="18" y="20.35" class="percentage" id="progress-text">0%</text>
                     </svg>
                 </div>
-            </header>
-
-            <div id="plan-loading" style="display: none; text-align: center;" class="glass-panel">
-                <p>Curating your personalized path...</p>
-                <div class="spinner"></div>
+                <span style="font-size:0.75rem; color:var(--text-secondary);">Progress</span>
             </div>
+        </header>
 
-            <!-- CSS Grid layout for dashboard content -->
-            <div id="dashboard-grid-container" class="dashboard-grid" style="display: none;">
-                <!-- Roadmap (Left Column) -->
-                <div class="dashboard-column roadmap-col">
-                    <div class="glass-panel" id="roadmap-container">
-                        <h3>Study Roadmap</h3>
-                        <div id="roadmap-list" class="timeline"></div>
-                    </div>
-                </div>
+        <!-- Loading state -->
+        <div id="plan-loading" style="display:none; text-align:center;" class="glass-panel">
+            <p id="loading-status-text">Curating your personalized path...</p>
+            <div class="spinner"></div>
+            <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:8px;">Powered by Gemini AI ✨</p>
+        </div>
 
-                <!-- Right Column (Widgets) -->
-                <div class="dashboard-column widgets-col">
-                    <div class="glass-panel widget" id="priorities-container">
-                        <h3>Revision Priorities</h3>
-                        <ul id="priorities-list" class="priority-list"></ul>
-                    </div>
-
-                    <div class="glass-panel widget" id="questions-container">
-                        <h3>Practice Questions</h3>
-                        <ul id="questions-list" class="question-list"></ul>
-                    </div>
-
-                    <div class="glass-panel widget" id="resources-container">
-                        <h3>Recommended Resources</h3>
-                        <ul id="resources-list" class="resource-list"></ul>
-                    </div>
+        <!-- Grid widgets -->
+        <div id="dashboard-grid-container" class="dashboard-grid" style="display:none;">
+            <!-- Left: Roadmap -->
+            <div class="dashboard-column roadmap-col">
+                <div class="glass-panel">
+                    <h3>📍 Study Roadmap</h3>
+                    <div id="roadmap-list" class="timeline"></div>
                 </div>
             </div>
 
-            <button type="button" class="btn-secondary" id="reset-btn" style="margin-top: 1.5rem; align-self: flex-start;">Start Over</button>
-        </section>
-    </main>
-    <script src="js/state.js"></script>
-    <script src="js/ai-service.js"></script>
-    <script src="js/app.js"></script>
+            <!-- Right: Widgets -->
+            <div class="dashboard-column widgets-col">
+                <div class="glass-panel widget">
+                    <h3>🔥 Revision Priorities</h3>
+                    <ul id="priorities-list" class="priority-list"></ul>
+                </div>
+                <div class="glass-panel widget">
+                    <h3>🧠 Practice Questions</h3>
+                    <ul id="questions-list" class="question-list"></ul>
+                </div>
+                <div class="glass-panel widget">
+                    <h3>📚 Recommended Resources</h3>
+                    <ul id="resources-list" class="resource-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons row -->
+        <div style="display:flex; gap:14px; margin-top:1.5rem; flex-wrap:wrap; align-items:center;">
+            <button type="button" class="btn-secondary" id="reset-btn">🔄 Change Path</button>
+            <button type="button" class="btn-result" id="view-result-btn">🏅 View Result Card</button>
+            <button type="button" class="btn-history" id="view-history-btn">📜 Plan History</button>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — HISTORY PANEL (slide-in overlay)
+    ════════════════════════════════════════════════════════ -->
+    <div id="history-overlay" class="result-overlay" style="display:none;">
+        <div class="result-card glass-panel" style="max-width:640px;">
+            <div class="result-card-header">
+                <div class="result-badge">📜</div>
+                <h2>Plan History</h2>
+                <p class="result-subtitle">All study plans you've ever generated, stored in IndexedDB.</p>
+            </div>
+            <ul id="history-list" class="history-list"></ul>
+            <div class="result-actions">
+                <button class="btn-secondary" id="history-close-btn">✕ Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SECTION 4 — RESULT CARD (Modal overlay)
+    ════════════════════════════════════════════════════════ -->
+    <div id="result-overlay" class="result-overlay" style="display:none;">
+        <div class="result-card glass-panel">
+            <div class="result-card-header">
+                <div class="result-badge">🏅</div>
+                <h2>Study Result Card</h2>
+                <p class="result-subtitle" id="result-date"></p>
+            </div>
+
+            <div class="result-student-info">
+                <div class="result-avatar" id="result-avatar"></div>
+                <div>
+                    <div class="result-name" id="result-name"></div>
+                    <div class="result-email" id="result-email"></div>
+                </div>
+            </div>
+
+            <div class="result-stats-grid">
+                <div class="stat-card stat-blue">
+                    <div class="stat-value" id="result-topic"></div>
+                    <div class="stat-label">Topic</div>
+                </div>
+                <div class="stat-card stat-teal">
+                    <div class="stat-value" id="result-progress-val"></div>
+                    <div class="stat-label">Progress</div>
+                </div>
+                <div class="stat-card stat-amber">
+                    <div class="stat-value" id="result-tasks-done"></div>
+                    <div class="stat-label">Tasks Done</div>
+                </div>
+                <div class="stat-card stat-rose">
+                    <div class="stat-value" id="result-questions"></div>
+                    <div class="stat-label">Questions</div>
+                </div>
+            </div>
+
+            <div class="result-goal-box">
+                <strong>🎯 Goal:</strong> <span id="result-goal"></span>
+            </div>
+            <div class="result-weakness-box">
+                <strong>⚠️ Focus Area:</strong> <span id="result-weakness"></span>
+            </div>
+
+            <div id="result-grade-section" class="result-grade-section">
+                <div class="grade-circle" id="result-grade-circle">
+                    <span id="result-grade-letter">A</span>
+                </div>
+                <div>
+                    <div id="result-grade-label" style="font-size:1.2rem; font-weight:700;"></div>
+                    <div style="color:var(--text-secondary); font-size:0.9rem;">Keep pushing — you've got this! 🚀</div>
+                </div>
+            </div>
+
+            <div class="result-actions">
+                <button class="btn-primary" id="result-close-btn">✅ Back to Dashboard</button>
+                <button class="btn-secondary" id="result-print-btn">🖨️ Print / Save as PDF</button>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="js/auth.js"></script>
+<script src="js/state.js"></script>
+<script src="js/db.js"></script>
+<script src="js/ai-service.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
 </body>
 </html>
