@@ -13,9 +13,6 @@
 <body>
 <main class="app-container">
 
-    <!-- ═══════════════════════════════════════════════════════
-         HEADER
-    ════════════════════════════════════════════════════════ -->
     <header class="glass-panel app-header">
         <div>
             <h1>AI Study Path Tutor</h1>
@@ -30,10 +27,6 @@
             <button class="btn-logout" id="logout-btn">Logout</button>
         </div>
     </header>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 1 — LOGIN
-    ════════════════════════════════════════════════════════ -->
     <section id="login-section" class="glass-panel content-area">
         <h2>Welcome, Student 👋</h2>
         <p>Sign in to save your progress, view your result card, and keep your study plan.</p>
@@ -56,10 +49,6 @@
             <button type="submit" class="btn-primary" id="login-btn">Get Started &rarr;</button>
         </form>
     </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 2 — INTAKE (Manual + Upload)
-    ════════════════════════════════════════════════════════ -->
     <section id="intake-section" class="glass-panel content-area" style="display:none;">
         <h2>Build Your Study Plan</h2>
         <p>Choose how you want to generate your personalised roadmap.</p>
@@ -107,10 +96,7 @@
             <button type="submit" class="btn-primary" id="generate-upload-btn">⚡ Analyse Files &amp; Generate</button>
         </form>
     </section>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 3 — DASHBOARD
-    ════════════════════════════════════════════════════════ -->
+    
     <section id="dashboard-section" class="dashboard-area" style="display:none;">
 
         <!-- Dashboard header row -->
@@ -137,18 +123,13 @@
             <div class="spinner"></div>
             <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:8px;">Powered by Gemini AI ✨</p>
         </div>
-
-        <!-- Grid widgets -->
         <div id="dashboard-grid-container" class="dashboard-grid" style="display:none;">
-            <!-- Left: Roadmap -->
             <div class="dashboard-column roadmap-col">
                 <div class="glass-panel">
                     <h3>📍 Study Roadmap</h3>
                     <div id="roadmap-list" class="timeline"></div>
                 </div>
             </div>
-
-            <!-- Right: Widgets -->
             <div class="dashboard-column widgets-col">
                 <div class="glass-panel widget">
                     <h3>🔥 Revision Priorities</h3>
@@ -164,8 +145,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Action buttons row -->
         <div style="display:flex; gap:14px; margin-top:1.5rem; flex-wrap:wrap; align-items:center;">
             <button type="button" class="btn-secondary" id="reset-btn">🔄 Change Path</button>
             <button type="button" class="btn-result" id="view-result-btn">🏅 View Result Card</button>
@@ -173,9 +152,7 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 4 — HISTORY PANEL (slide-in overlay)
-    ════════════════════════════════════════════════════════ -->
+    <!--SECTION 4 — HISTORY PANEL (slide-in overlay)-->
     <div id="history-overlay" class="result-overlay" style="display:none;">
         <div class="result-card glass-panel" style="max-width:640px;">
             <div class="result-card-header">
@@ -189,10 +166,6 @@
             </div>
         </div>
     </div>
-
-    <!-- ═══════════════════════════════════════════════════════
-         SECTION 4 — RESULT CARD (Modal overlay)
-    ════════════════════════════════════════════════════════ -->
     <div id="result-overlay" class="result-overlay" style="display:none;">
         <div class="result-card glass-panel">
             <div class="result-card-header">
