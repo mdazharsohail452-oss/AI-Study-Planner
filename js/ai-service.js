@@ -2,13 +2,11 @@
 // Calls Google Gemini API to generate a structured study plan.
 // Falls back to a rich mock if API key is missing or call fails.
 
-const GEMINI_API_KEY = 'AIzaSyBl4JEP3pFHKbz3-v0P2MZ_tMjYkjkuLcc'; // ← Replace with your key
+const GEMINI_API_KEY = 'AIzaSyBl4JEP3pFHKbz3-v0P2MZ_tMjYkjkuLcc'; 
 
 const AIService = {
 
-    // ──────────────────────────────────────────────────────────────
     //  Main entry point
-    // ──────────────────────────────────────────────────────────────
     async generateStudyPlan(rawTopic, rawGoal, rawWeaknesses) {
         const topic      = rawTopic.length > 80 ? rawTopic.substring(0, 80) + '...' : rawTopic || 'the core subject';
         const goal       = rawGoal       || 'mastery';
@@ -25,10 +23,7 @@ const AIService = {
         }
         return this._mockPlan(topic, goal, weaknesses);
     },
-
-    // ──────────────────────────────────────────────────────────────
     //  Gemini API call
-    // ──────────────────────────────────────────────────────────────
     async _callGemini(topic, goal, weaknesses) {
         const prompt = `
 You are an expert AI tutor. A student wants a personalised study plan.
@@ -88,10 +83,7 @@ Rules:
         parsed.metadata = { topic, goal, weaknessFocus: weaknesses, createdAt: new Date().toISOString() };
         return parsed;
     },
-
-    // ──────────────────────────────────────────────────────────────
     //  Rich fallback mock (used when no API key / Gemini fails)
-    // ──────────────────────────────────────────────────────────────
     _mockPlan(topic, goal, weaknesses) {
         return new Promise(resolve => {
             setTimeout(() => {
