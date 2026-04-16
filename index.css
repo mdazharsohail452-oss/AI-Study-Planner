@@ -1,20 +1,13 @@
-/* ==========================================================================
-   CSS Variables & Tokens - Vibrant Aurora Theme (No Purple!)
-   ========================================================================== */
 :root {
-    /* Ultra Deep Navy Background */
     --bg-color: #020617; 
     --text-primary: #f8fafc;
     --text-secondary: #cbd5e1;
-    
-    /* Vibrant Colorful Accents */
-    --primary-color: #0ea5e9; /* Sky Blue */
-    --secondary-color: #14b8a6; /* Teal */
-    --third-color: #f59e0b; /* Amber/Golden */
-    --fourth-color: #f43f5e; /* Rose/Red */
-    --success-color: #10b981; /* Emerald/Success */
+    --primary-color: #0ea5e9; 
+    --secondary-color: #14b8a6; 
+    --third-color: #f59e0b; 
+    --fourth-color: #f43f5e; 
+    --success-color: #10b981; 
 
-    /* Glassmorphism Tokens */
     --glass-bg: rgba(15, 23, 42, 0.55); 
     --glass-border: rgba(255, 255, 255, 0.12);
     --glass-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.7);
@@ -23,24 +16,17 @@
     /* Typography */
     --font-family: 'Outfit', sans-serif;
     --font-size-base: 16px;
-    --h1-size: 3rem; /* Larger, bolder impact */
+    --h1-size: 3rem;
     --h2-size: 1.8rem;
-
-    /* Spacing & Layout */
     --spacing-sm: 0.5rem;
     --spacing-md: 1rem;
     --spacing-lg: 2rem;
     --spacing-xl: 3rem;
-    --border-radius: 16px; /* Friendly and modern rounding */
-    
-    /* Transitions */
+    --border-radius: 16px; 
+
     --transition-fast: 0.2s ease;
     --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
-/* ==========================================================================
-   Reset & Base Styles with Multi-Orb Animated Background
-   ========================================================================== */
 * {
     margin: 0;
     padding: 0;
@@ -63,7 +49,6 @@ body {
     line-height: 1.6;
 }
 
-/* Beautiful Animated Light Orbs */
 body::before {
     content: ''; position: absolute;
     top: -10%; left: -10%;
@@ -82,7 +67,6 @@ body::after {
     animation: drift 20s infinite alternate-reverse ease-in-out;
 }
 
-/* Third hidden orb fixed for extra gradient mixing */
 html::before {
     content: ''; position: fixed;
     top: 30%; left: 35%;
@@ -98,9 +82,7 @@ html::before {
     100% { transform: translate(40px, 40px) scale(1.1); }
 }
 
-/* ==========================================================================
-   Layout Containers & Glass Panels
-   ========================================================================== */
+/* Layout Containers & Glass Panels */
 .app-container {
     width: 100%;
     max-width: 1200px;
@@ -125,14 +107,10 @@ html::before {
     box-shadow: 0 15px 45px 0 rgba(0, 0, 0, 0.8), 0 0 20px rgba(14, 165, 233, 0.15);
 }
 
-/* ==========================================================================
-   Vibrant Typography
-   ========================================================================== */
 h1, h2, h3 { font-weight: 700; margin-bottom: var(--spacing-sm); letter-spacing: -0.02em; }
 
 h1 {
     font-size: var(--h1-size);
-    /* Vibrant multi-color gradient text */
     background: linear-gradient(135deg, var(--secondary-color), var(--third-color), var(--fourth-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -142,9 +120,7 @@ h1 {
 h2 { font-size: var(--h2-size); }
 p { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
 
-/* ==========================================================================
-   Buttons
-   ========================================================================== */
+/* Buttons */
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white; border: none;
@@ -182,10 +158,6 @@ p { color: var(--text-secondary); margin-bottom: var(--spacing-md); }
     border-color: var(--fourth-color);
     color: white;
 }
-
-/* ==========================================================================
-   Forms & Inputs
-   ========================================================================== */
 .intake-form { display: flex; flex-direction: column; gap: var(--spacing-md); margin-top: var(--spacing-md); }
 .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
@@ -204,10 +176,6 @@ input[type="text"]:focus {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
 }
-
-/* ==========================================================================
-   UI Components (Multi-colored Spinner)
-   ========================================================================== */
 .spinner {
     width: 45px; height: 45px;
     border: 4px solid rgba(255, 255, 255, 0.1);
@@ -222,10 +190,6 @@ input[type="text"]:focus {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
-/* ==========================================================================
-   Dashboard Grid Layout
-   ========================================================================== */
 .dashboard-area { display: flex; flex-direction: column; gap: var(--spacing-lg); width: 100%; }
 .dashboard-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: var(--spacing-md); }
 .overview-text { margin-bottom: 0; max-width: 750px; font-size: 1.05rem; }
@@ -236,9 +200,7 @@ input[type="text"]:focus {
 
 .dashboard-column { display: flex; flex-direction: column; gap: var(--spacing-lg); }
 
-/* ==========================================================================
-   Progress Circle Widget (Gradient stroke logic)
-   ========================================================================== */
+/* Progress Circle Widget (Gradient stroke logic) */
 .progress-widget { width: 90px; height: 90px; }
 .circular-chart { display: block; max-width: 100%; max-height: 100%; }
 .circle-bg { fill: none; stroke: rgba(255, 255, 255, 0.08); stroke-width: 3.8; }
@@ -250,9 +212,7 @@ input[type="text"]:focus {
 }
 .percentage { fill: var(--text-primary); font-family: var(--font-family); font-size: 0.6em; text-anchor: middle; font-weight: 700; }
 
-/* ==========================================================================
-   Roadmap & Timeline Widget
-   ========================================================================== */
+/* Roadmap & Timeline Widget*/
 .timeline { position: relative; padding-left: 28px; margin-top: var(--spacing-md); }
 .timeline::before { content: ''; position: absolute; top: 0; left: 6px; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--primary-color), var(--third-color)); border-radius: 4px; }
 
@@ -285,9 +245,7 @@ input[type="text"]:focus {
 .task-item.completed { opacity: 0.5; background: rgba(34, 197, 94, 0.05); }
 .task-item.completed span { text-decoration: line-through; color: var(--text-secondary); }
 
-/* ==========================================================================
-   Lists (Priorities, Questions, Resources - Multi-colored Accents!)
-   ========================================================================== */
+/* Lists (Priorities, Questions, Resources - Multi-colored Accents!) */
 .priority-list, .question-list, .resource-list {
     list-style: none; padding: 0; margin-top: var(--spacing-md); display: flex; flex-direction: column; gap: 12px;
 }
@@ -313,14 +271,11 @@ input[type="text"]:focus {
 .resource-list a { color: var(--text-primary); text-decoration: none; font-weight: 600; font-size: 1.05rem; }
 .resource-list a:hover { color: var(--secondary-color); text-decoration: underline; }
 
-/* Scrollable Containers */
 .question-list, .resource-list { max-height: 400px; overflow-y: auto; padding-right: 10px; }
 .question-list::-webkit-scrollbar, .resource-list::-webkit-scrollbar { width: 6px; }
 .question-list::-webkit-scrollbar-track, .resource-list::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
 .question-list::-webkit-scrollbar-thumb { background: var(--third-color); border-radius: 10px; }
 .resource-list::-webkit-scrollbar-thumb { background: var(--secondary-color); border-radius: 10px; }
-
-/* Difficulty Badges */
 .diff-badge { font-size: 0.8rem; padding: 4px 10px; border-radius: 8px; margin-left: 10px; font-weight: 700; display: inline-block; }
 .diff-easy { color: #fff; background: rgba(16, 185, 129, 0.8); box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);}
 .diff-medium { color: #fff; background: rgba(245, 158, 11, 0.8); box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);}
@@ -333,9 +288,7 @@ input[type="text"]:focus {
 }
 .res-desc { font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px; margin-bottom: 0; line-height: 1.5; }
 
-/* ==========================================================================
-   File Upload Styles
-   ========================================================================== */
+/* File Upload Styles*/
 .file-upload-group {
     background: rgba(14, 165, 233, 0.05); border: 2px dashed var(--primary-color);
     padding: var(--spacing-lg); border-radius: 12px; text-align: center;
@@ -350,9 +303,7 @@ input[type="text"]:focus {
 }
 .file-input::file-selector-button:hover { box-shadow: 0 4px 15px rgba(20, 184, 166, 0.4); transform: scale(1.05); }
 
-/* ==========================================================================
-   Tabs UI
-   ========================================================================== */
+
 .tabs-container { display: flex; gap: 12px; margin-bottom: var(--spacing-md); border-bottom: 2px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
 .tab-btn {
     background: transparent; border: none; color: var(--text-secondary);
@@ -367,9 +318,7 @@ input[type="text"]:focus {
     box-shadow: 0 0 15px rgba(14, 165, 233, 0.2);
 }
 
-/* ==========================================================================
-   App Header
-   ========================================================================== */
+
 .app-header {
     display: flex;
     justify-content: space-between;
@@ -378,9 +327,7 @@ input[type="text"]:focus {
     gap: var(--spacing-md);
 }
 
-/* ==========================================================================
-   Student Avatar
-   ========================================================================== */
+
 .avatar {
     width: 44px; height: 44px;
     border-radius: 50%;
@@ -403,9 +350,7 @@ input[type="text"]:focus {
 }
 .btn-logout:hover { background: var(--fourth-color); color: #fff; }
 
-/* ==========================================================================
-   View Result Card Button
-   ========================================================================== */
+/* View Result Card Button */
 .btn-result {
     background: linear-gradient(135deg, var(--third-color), var(--fourth-color));
     color: white; border: none;
@@ -416,9 +361,7 @@ input[type="text"]:focus {
 }
 .btn-result:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(244, 63, 94, 0.5); }
 
-/* ==========================================================================
-   Result Card Overlay
-   ========================================================================== */
+/* Result Card Overlay */
 .result-overlay {
     position: fixed;
     inset: 0;
@@ -476,7 +419,6 @@ input[type="text"]:focus {
 .result-name  { font-size: 1.2rem; font-weight: 700; }
 .result-email { font-size: 0.85rem; color: var(--text-secondary); }
 
-/* Stats grid */
 .result-stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -544,9 +486,6 @@ input[type="text"]:focus {
 .result-actions { display: flex; gap: 12px; flex-wrap: wrap; }
 .result-actions .btn-primary, .result-actions .btn-secondary { flex: 1; text-align: center; }
 
-/* ==========================================================================
-   Modern Icon Inputs
-   ========================================================================== */
 .input-icon-wrap {
     position: relative;
     display: flex;
@@ -568,7 +507,7 @@ input[type="text"]:focus {
     background: rgba(2, 6, 23, 0.6);
     border: 2px solid rgba(255, 255, 255, 0.08);
     color: white;
-    padding: 0.9rem 1rem 0.9rem 2.8rem; /* left offset for icon */
+    padding: 0.9rem 1rem 0.9rem 2.8rem;
     border-radius: 12px;
     font-family: var(--font-family);
     font-size: 1rem;
@@ -593,9 +532,7 @@ input[type="text"]:focus {
     padding-left: 4px;
 }
 
-/* ==========================================================================
-   Print Styles — Clean white card, no dark theme
-   ========================================================================== */
+
 @media print {
     /* Hide absolutely everything */
     body { background: white !important; }
@@ -605,7 +542,6 @@ input[type="text"]:focus {
     #dashboard-section,
     .result-actions { display: none !important; }
 
-    /* Make overlay non-fixed so it flows into the page */
     .result-overlay {
         position: static !important;
         background: white !important;
@@ -613,8 +549,6 @@ input[type="text"]:focus {
         padding: 0 !important;
         display: block !important;
     }
-
-    /* White card, no glass */
     .result-card {
         max-width: 100% !important;
         box-shadow: none !important;
@@ -624,7 +558,6 @@ input[type="text"]:focus {
         padding: 24px !important;
     }
 
-    /* Ensure text is dark for print */
     .result-card h2,
     .result-name,
     .result-email,
@@ -635,8 +568,7 @@ input[type="text"]:focus {
     .result-weakness-box { color: #111 !important; }
 
     .result-card p { color: #444 !important; }
-
-    /* Show stat cards with light borders instead of glowing */
+   
     .stat-blue, .stat-teal, .stat-amber, .stat-rose {
         background: #f8f8f8 !important;
         border: 1px solid #ccc !important;
@@ -666,9 +598,8 @@ input[type="text"]:focus {
     }
 }
 
-/* ==========================================================================
-   File Tags (pill display after file selection)
-   ========================================================================== */
+/* 
+   File Tags (pill display after file selection) */
 .file-tags {
     display: flex;
     flex-wrap: wrap;
@@ -705,9 +636,7 @@ input[type="text"]:focus {
 }
 .file-tag-remove:hover { opacity: 1; }
 
-/* ==========================================================================
-   Plan History Button
-   ========================================================================== */
+/* Plan History Button*/
 .btn-history {
     background: rgba(20, 184, 166, 0.15);
     border: 1px solid var(--secondary-color);
@@ -722,9 +651,7 @@ input[type="text"]:focus {
 }
 .btn-history:hover { background: var(--secondary-color); color: white; }
 
-/* ==========================================================================
-   History List Items
-   ========================================================================== */
+/* History List Items */
 .history-list {
     list-style: none;
     padding: 0;
