@@ -2,7 +2,7 @@
 // Calls Google Gemini API to generate a structured study plan.
 // Falls back to a rich mock if API key is missing or call fails.
 
-const GEMINI_API_KEY = 'AIzaSyBl4JEP3pFHKbz3-v0P2MZ_tMjYkjkuLcc'; 
+const GEMINI_API_KEY = ' '; 
 
 const AIService = {
 
